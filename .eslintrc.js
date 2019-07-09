@@ -1,3 +1,5 @@
+// 英文原版 https://eslint.org/docs/user-guide/configuring
+// 中文翻译 http://eslint.cn/docs/user-guide/configuring
 module.exports = {
   root: true,
   env: {
