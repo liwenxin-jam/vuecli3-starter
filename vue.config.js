@@ -1,14 +1,16 @@
 // Vue CLI3配置参考 https://cli.vuejs.org/zh/config/#vue-config-js
-const path = require("path");
-const resolve = dir => path.join(__dirname, dir);
+const path = require('path')
+const resolve = dir => path.join(__dirname, dir)
 
 module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
     config.resolve.alias
-      .set("@", resolve("src"))
-      .set("@views", resolve("src/views"))
-      .set("@utils", resolve("src/utils"));
+      .set('@', resolve('src'))
+      .set('@views', resolve('src/views'))
+      .set('@scss', resolve('src/assets/styles'))
+      .set('@img', resolve('src/assets/images'))
+      .set('@utils', resolve('src/utils'))
 
     // svg loader
     // const svgRule = config.module.rule('svg') // 找到svg-loader
@@ -22,8 +24,8 @@ module.exports = {
     //     symbolId: 'icon-[name]'
     //   });
     // 删除预加载
-    config.plugins.delete('preload');
-    config.plugins.delete('prefetch');
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
   },
   devServer: {
     port: 8082,

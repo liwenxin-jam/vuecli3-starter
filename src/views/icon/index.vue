@@ -2,6 +2,7 @@
   <div>
     icon
     <c-svg-icon icon-class="user" />
+    <i class="fa fa-fw fa-address-book" />
   </div>
 </template>
 
