@@ -1,23 +1,32 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
+// 动态导入视图模块
+const syncImportComponent = (relativeModulePath) => {
+  const asyncComponent = () => {
+    let component = import(/* webpackChunkName: "view-[request]" */ `./views/${relativeModulePath}`)
+    component.catch((e) => {
+      console.log('加载错误')
+      console.error(e)
+    })
+    return component
+  }
+  return asyncComponent
+}
+
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+  routes: [{
+    path: '/icon',
+    name: 'icon',
+    component: syncImportComponent('icon')
+    // component: () => import(/* webpackChunkName: "icon" */ './views/icon')
+  },
+  {
+    path: '/iconInfo',
+    name: 'iconInfo',
+    component: syncImportComponent('icon/info')
+  }
   ]
 })
