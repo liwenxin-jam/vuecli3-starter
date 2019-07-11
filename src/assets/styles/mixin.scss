@@ -1,0 +1,108 @@
+@mixin z-index($position, $zindex) {
+  position: $position;
+  z-index: $zindex;
+}
+
+@mixin font($size: 12px, $color: #fff, $weight: 400) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+
+@mixin flex($justify: center, $align: center, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin flex-direction($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin flex-justify($direction: row) {
+  display: flex;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-align($direction: row) {
+  display: flex;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-content($content: center) {
+  display: flex;
+  justify-content: $content;
+}
+
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin bg-border($bg, $border) {
+  background: $bg;
+  border: $border;
+}
+
+@mixin bg-radius($bg, $radius) {
+  background: $bg;
+  border-radius: $radius;
+}
+
+@mixin border($color, $px: 1px, $type: solid) {
+  border: $px $type $color;
+}
+
+@mixin border-l($color, $px: 1px, $type: solid) {
+  border-left: $px $type $color;
+}
+
+@mixin ellipsis($width: 100%) {
+  width: $width;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin both-center($horizontal: center, $vertical: middle) {
+  text-align: $horizontal;
+  vertical-align: $vertical;
+}
+
+@mixin img-adaptive {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+}
+
+@mixin scroll-y($height: auto) {
+  height: $height;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+@mixin transition($property, $delay) {
+  -webkit-transition: $property $delay;
+  -moz-transition: $property $delay;
+  -ms-transition: $property $delay;
+  -o-transition: $property $delay;
+  transition: $property $delay;
+}
+
+@mixin toolbar($angle) {
+  transform: rotate($angle);
+
+  i {
+    transform: rotate(-$angle);
+  }
+
+  &.active {
+    i {
+      color: $color-tips;
+    }
+  }
+}

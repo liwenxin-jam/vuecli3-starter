@@ -5,3 +5,9 @@
   width: 30px;
   display: inline-block;
 }
+
+.home {
+  // background: url($src + '/images/500.png');
+  color: $color-main;
+  @include wh(100%, 100%);
+}

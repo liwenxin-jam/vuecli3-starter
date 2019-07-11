@@ -12,6 +12,9 @@
       return {
         msg: 'welcome to Vue!'
       }
+    },
+    mounted() {
+      console.log('hello world!')
     }
   }
 </script>

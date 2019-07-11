@@ -1,0 +1,53 @@
+$color-main: #373e48;
+$color-sub: #7a8aa0;
+$color-deep: #21252b;
+$color-tips: #1ab394;
+$color-text: #dddddd;
+$color-pale: #49525f;
+$color-info: #ff9900;
+$color-danger: #d9534f;
+$border-color: #848f9e;
+$border-gray: #e5e6e7;
+$border-hover: #bfbdbd;
+$border-info: #E9EBF5;
+$color-ccc: #CCCCCC;
+$color-fff: #ffffff;
+$color-gray: #3d3d3d;
+$color-label: #908d8d;
+$color-blue: #1C5180;
+
+// ------- anno diagnosis colors -----------
+$anno-dark: #000;
+$anno-dark-1: $color-main;
+$anno-dark-2: $color-pale;
+$anno-dark-3: $color-deep;
+$anno-tool-bg: $anno-dark-1;
+$anno-inner-bg: $anno-dark-2;
+$anno-tool-border: $border-color;
+$menu-bar-bg: $anno-dark-1;
+$menu-bar-deep: $anno-dark-3;
+$menu-bar-text: $color-sub;
+$menu-bar-border: $anno-dark-2;
+$menu-bg-hover: $anno-dark-2;
+
+.color-main {
+  color: $color-main; // 主色调
+}
+.color-sub {
+  color: $color-sub; // 副色调
+}
+.color-deep {
+  color: $color-deep; // 深色调
+}
+.color-pale {
+  color: $color-pale; // 浅色调
+}
+.color-tips {
+  color: $color-tips; // 提示色
+}
+.color-danger {
+  color: $color-danger; // 红色
+}
+.color-text {
+  color: $color-text; // 文字颜色
+}

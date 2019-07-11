@@ -3,8 +3,25 @@ const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 
 const isProduction = process.env.NODE_ENV === 'production';
+const cdn = {
+  css: [],
+  js: [
+    'https://cdn.bootcss.com/vue/2.6.6/vue.runtime.min.js',
+    'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js',
+    'https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js',
+    'https://cdn.bootcss.com/axios/0.18.0/axios.min.js'
+  ]
+}
 
 module.exports = {
+  // 是否需要二级域名访问资源
+  publicPath: "./",
+  // 输出文件目录
+  outputDir: isProduction ? path.resolve(__dirname, '../public') : "dist",
+  // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。区别public/static第三方文件
+  assetsDir: "assets",
+  // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径
+  // indexPath: isProduction ? path.resolve(__dirname, '../public/index.html') : "./",
   lintOnSave: false,
   chainWebpack: config => {
     config.resolve.alias
@@ -28,12 +45,61 @@ module.exports = {
     // 删除预加载
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
+
+    if (isProduction) {
+      // 压缩代码
+      config.optimization.minimize(true);
+      // 分割代码
+      config.optimization.splitChunks({
+        chunks: 'all'
+      });
+      // 生产环境注入cdn
+      config.plugin('html')
+        .tap(args => {
+          args[0].cdn = cdn;
+          return args;
+        });
+    }
   },
   // vscode 断点调试 https://cn.vuejs.org/v2/cookbook/debugging-in-vscode.html
   configureWebpack: config => {
-    if (!isProduction) {
-      config.devtool = 'source-map'
+    config.entry = ["babel-polyfill", "./src/main.js"]
+    if (isProduction) {
+      // 用cdn方式引入
+      config.externals = {
+        'vue': 'Vue',
+        'vuex': 'Vuex',
+        'vue-router': 'VueRouter',
+        'axios': 'axios'
+      }
+    } else {
+      // 生产模式下省略devtool，或者手动设成nosources-source-map无源代码内容
+      // source-map 原始源代码(断点调试) eval-source-map cheap-eval-source-map cheap-module-eval-source-map
+      config.devtool = 'eval-source-map'
     }
+  },
+  // 生产环境是否生成 sourceMap 文件，打包时不生成.map文件
+  productionSourceMap: !isProduction,
+  // css相关配置
+  css: {
+    // 是否使用css分离插件 ExtractTextPlugin
+    extract: true,
+    // 开启 CSS source maps?
+    sourceMap: false,
+    // css预设器配置项
+    loaderOptions: {
+      // pass options to sass-loader
+      sass: {
+        // 引入全局变量样式
+        data: `
+          @import '@scss/variables.scss';
+          @import '@scss/mixin.scss';
+          $src: "${process.env.VUE_APP_PUBLIC_PATH}";
+        `
+      }
+    },
+    // 启用 CSS modules for all css / pre-processor files.
+    modules: false,
   },
   devServer: {
     port: 8099,
