@@ -51,7 +51,21 @@ module.exports = {
       config.optimization.minimize(true);
       // 分割代码
       config.optimization.splitChunks({
-        chunks: 'all'
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'chunk-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial'
+          },
+          elementUI: {
+            name: 'chunk-elementUI',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]element-ui[\\/]/,
+            chunks: 'all'
+          }
+        }
       });
       // 生产环境注入cdn
       config.plugin('html')
