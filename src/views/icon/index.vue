@@ -6,6 +6,17 @@
   </div>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        msg: 'welcome to Vue!'
+      }
+    }
+  }
+</script>
+
+
 <style lang="scss" src="./index.scss" scoped>
   // src="./index.scss"
   // @import './index.scss';

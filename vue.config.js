@@ -2,6 +2,8 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
@@ -27,8 +29,14 @@ module.exports = {
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
   },
+  // vscode 断点调试 https://cn.vuejs.org/v2/cookbook/debugging-in-vscode.html
+  configureWebpack: config => {
+    if (!isProduction) {
+      config.devtool = 'source-map'
+    }
+  },
   devServer: {
-    port: 8082,
+    port: 8099,
     open: true, // 自动开启浏览器
     compress: true, // 开启压缩
     overlay: {

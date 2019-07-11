@@ -18,6 +18,9 @@ const syncImportComponent = (relativeModulePath) => {
 
 export default new Router({
   routes: [{
+    path: "/",
+    redirect: '/icon',
+  },{
     path: '/icon',
     name: 'icon',
     component: syncImportComponent('icon')
