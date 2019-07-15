@@ -17,19 +17,23 @@ module.exports = {
   // 是否需要二级域名访问资源
   publicPath: "./",
   // 输出文件目录
-  outputDir: isProduction ? path.resolve(__dirname, '../public') : "dist",
+  // outputDir: isProduction ? path.resolve(__dirname, '../public') : "dist",
   // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。区别public/static第三方文件
   assetsDir: "assets",
   // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径
   // indexPath: isProduction ? path.resolve(__dirname, '../public/index.html') : "./",
   lintOnSave: false,
   chainWebpack: config => {
+    config
+      .entry('main')
+      .add('babel-polyfill')
+      .end();
     config.resolve.alias
       .set('@', resolve('src'))
       .set('@views', resolve('src/views'))
       .set('@scss', resolve('src/assets/styles'))
       .set('@img', resolve('src/assets/images'))
-      .set('@utils', resolve('src/utils'))
+      .set('@utils', resolve('src/utils'));
 
     // svg loader
     // const svgRule = config.module.rule('svg') // 找到svg-loader
@@ -77,7 +81,8 @@ module.exports = {
   },
   // vscode 断点调试 https://cn.vuejs.org/v2/cookbook/debugging-in-vscode.html
   configureWebpack: config => {
-    config.entry = ["babel-polyfill", "./src/main.js"]
+    // config.entry = ["babel-polyfill", "./src/main.js"];
+
     if (isProduction) {
       // 用cdn方式引入
       config.externals = {
@@ -85,7 +90,12 @@ module.exports = {
         'vuex': 'Vuex',
         'vue-router': 'VueRouter',
         'axios': 'axios'
-      }
+      };
+      // @vue/cli-service的配置源码也是使用了terser-webpack-plugin插件进行Tree Shaking
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
     } else {
       // 生产模式下省略devtool，或者手动设成nosources-source-map无源代码内容
       // source-map 原始源代码(断点调试) eval-source-map cheap-eval-source-map cheap-module-eval-source-map
