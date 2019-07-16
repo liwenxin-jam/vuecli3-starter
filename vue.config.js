@@ -1,15 +1,22 @@
 // Vue CLI3配置参考 https://cli.vuejs.org/zh/config/#vue-config-js
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production';
 const cdn = {
-  css: [],
+  css: [
+    'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+    'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css'
+  ],
   js: [
     'https://cdn.bootcss.com/vue/2.6.6/vue.runtime.min.js',
     'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js',
     'https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js',
-    'https://cdn.bootcss.com/axios/0.18.0/axios.min.js'
+    'https://cdn.bootcss.com/axios/0.18.0/axios.min.js',
+    'https://unpkg.com/element-ui/lib/index.js',
+    'https://cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js',
+    'https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js'
   ]
 }
 
@@ -89,13 +96,33 @@ module.exports = {
         'vue': 'Vue',
         'vuex': 'Vuex',
         'vue-router': 'VueRouter',
-        'axios': 'axios'
+        'axios': 'axios',
+        'element-ui': 'ELEMENT',
+        'js-cookie': 'Cookies',
+        'nprogress': 'NProgress'
       };
       // @vue/cli-service的配置源码也是使用了terser-webpack-plugin插件进行Tree Shaking
-      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
-      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
-      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
+      // 生产环境自动删除console和debugger
+      // config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
+      // config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+      // config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
+      // config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
+      // uglifyjs-webpack-plugin 配置代码压缩
+      config.plugins.push(
+        // 生产环境自动删除console和debugger
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            warnings: false,
+            compress: {
+              // warnings: false,
+              drop_debugger: true,
+              drop_console: true,
+            },
+          },
+          sourceMap: false,
+          parallel: true,
+        })
+      );
     } else {
       // 生产模式下省略devtool，或者手动设成nosources-source-map无源代码内容
       // source-map 原始源代码(断点调试) eval-source-map cheap-eval-source-map cheap-module-eval-source-map
@@ -125,6 +152,8 @@ module.exports = {
     // 启用 CSS modules for all css / pre-processor files.
     modules: false,
   },
+  // enabled by default if the machine has more than 1 cores
+  parallel: require('os').cpus().length > 1,
   devServer: {
     port: 8099,
     open: true, // 自动开启浏览器
