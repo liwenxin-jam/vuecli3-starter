@@ -15,8 +15,8 @@
     },
     mounted() {
       console.log('hello world!')
-      debugger
-      console.lo('hello world!')
+      // debugger
+      // console.lo('hello world!')
     }
   }
 </script>
