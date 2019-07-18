@@ -35,6 +35,16 @@ export default new Router({
       path: '/lifecycle',
       name: 'lifecycle',
       component: syncImportComponent('lifecycle')
+    },
+    {
+      path: '/mvvm',
+      name: 'mvvm',
+      component: syncImportComponent('mvvm')
+    },
+    {
+      path: '/communication',
+      name: 'communication',
+      component: syncImportComponent('communication')
     }
   ]
 })
