@@ -6,7 +6,8 @@ Vue.use(Router)
 // 动态导入视图模块
 const syncImportComponent = (relativeModulePath) => {
   const asyncComponent = () => {
-    let component = import( /* webpackChunkName: "view-[request]" */ `./views/${relativeModulePath}`)
+    let component =
+      import ( /* webpackChunkName: "view-[request]" */ `./views/${relativeModulePath}`)
     component.catch((e) => {
       console.log('加载错误')
       console.error(e)
@@ -24,7 +25,7 @@ export default new Router({
       path: '/icon',
       name: 'icon',
       component: syncImportComponent('icon-view')
-      // component: () => import(/* webpackChunkName: "icon" */ './views/icon')
+        // component: () => import(/* webpackChunkName: "icon" */ './views/icon')
     },
     {
       path: '/iconInfo',
@@ -45,6 +46,11 @@ export default new Router({
       path: '/communication',
       name: 'communication',
       component: syncImportComponent('communication')
+    },
+    {
+      path: '/practice',
+      name: 'practice',
+      component: syncImportComponent('practice')
     }
   ]
 })
