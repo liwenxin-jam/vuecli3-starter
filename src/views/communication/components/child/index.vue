@@ -9,25 +9,25 @@
 </template>
 
 <script>
-  import Event from '@utils/EventBus';
+import Event from '@utils/EventBus'
 
-  export default {
-    name: 'child',
-    props: {
-      users: {
-        type: Array,
-        default: () => [],
-        required: true
-      }
+export default {
+  name: 'child',
+  props: {
+    users: {
+      type: Array,
+      default: () => [],
+      required: true
+    }
+  },
+  methods: {
+    toParent () {
+      this.$emit('change', '子向父组件传值')
     },
-    methods: {
-      toParent() {
-        this.$emit('change', '子向父组件传值');
-      },
-      send() {
-        console.log(this)
-        Event.$emit('send', '发送数据给父组件');
-      }
+    send () {
+      console.log(this)
+      Event.$emit('send', '发送数据给父组件')
     }
   }
+}
 </script>

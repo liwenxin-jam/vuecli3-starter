@@ -1,4 +1,4 @@
-import Vue from 'vue';
-const Event = new Vue();
+import Vue from 'vue'
+const Event = new Vue()
 
-export default Event;
+export default Event

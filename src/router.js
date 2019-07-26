@@ -7,7 +7,7 @@ Vue.use(Router)
 const syncImportComponent = (relativeModulePath) => {
   const asyncComponent = () => {
     let component =
-      import ( /* webpackChunkName: "view-[request]" */ `./views/${relativeModulePath}`)
+      import( /* webpackChunkName: "view-[request]" */ `./views/${relativeModulePath}`)
     component.catch((e) => {
       console.log('加载错误')
       console.error(e)
@@ -19,13 +19,13 @@ const syncImportComponent = (relativeModulePath) => {
 
 export default new Router({
   routes: [{
-      path: "/",
-      redirect: '/icon',
+      path: '/',
+      redirect: '/icon'
     }, {
       path: '/icon',
       name: 'icon',
       component: syncImportComponent('icon-view')
-        // component: () => import(/* webpackChunkName: "icon" */ './views/icon')
+      // component: () => import(/* webpackChunkName: "icon" */ './views/icon')
     },
     {
       path: '/iconInfo',
@@ -36,6 +36,24 @@ export default new Router({
       path: '/lifecycle',
       name: 'lifecycle',
       component: syncImportComponent('lifecycle')
+    },
+    {
+      path: '/lifecycleOther',
+      name: 'lifecycleOther',
+      component: syncImportComponent('lifecycle/other')
+    },
+    {
+      path: '/lifecycleParams/:id',
+      name: 'lifecycleParams',
+      component: syncImportComponent('lifecycle/params')
+    },
+    {
+      path: '/lifecycleKeepAlive',
+      name: 'lifecycleKeepAlive',
+      component: syncImportComponent('lifecycle/keep-alive'),
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/mvvm',

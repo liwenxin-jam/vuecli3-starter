@@ -7,30 +7,30 @@
 </template>
 
 <script>
-  import Event from '@utils/EventBus';
-  import child from "./components/child";
+import Event from '@utils/EventBus'
+import child from './components/child'
 
-  export default {
-    name: 'communication',
-    components: { child },
-    data() {
-      return {
-        users: ["Henry", "Bucky", "Emily"]
-      }
-    },
-    mounted() {
-      console.log(this)
-      Event.$on('send', val => {
-        console.log(val);
-      })
-    },
-    methods: {
-      bindChange(val) {
-        console.log(val);
-      }
-    },
-    beforeDestroy() {
-      Event.$off('send');
+export default {
+  name: 'communication',
+  components: { child },
+  data () {
+    return {
+      users: ['Henry', 'Bucky', 'Emily']
     }
+  },
+  mounted () {
+    console.log(this)
+    Event.$on('send', val => {
+      console.log(val)
+    })
+  },
+  methods: {
+    bindChange (val) {
+      console.log(val)
+    }
+  },
+  beforeDestroy () {
+    Event.$off('send')
   }
+}
 </script>

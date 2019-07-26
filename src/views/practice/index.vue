@@ -10,23 +10,23 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       users: [
-        { id: 1, name: "jam", isActive: true },
-        { id: 2, name: "xx", isActive: false },
-        { id: 3, name: "lai", isActive: true }
+        { id: 1, name: 'jam', isActive: true },
+        { id: 2, name: 'xx', isActive: false },
+        { id: 3, name: 'lai', isActive: true }
       ]
-    };
+    }
   },
   computed: {
-    activeUsers() {
+    activeUsers () {
       return this.users.filter(user => {
-        return user.isActive;
-      });
+        return user.isActive
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -48,4 +48,3 @@ export default {
   background-color: red;
 }
 </style>
-

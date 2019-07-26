@@ -9,23 +9,23 @@
 </template>
 
 <script>
-  import myInput from './components/my-input';
+import myInput from './components/my-input'
 
-  export default {
-    // components: { myInput },
-    components: { 'myInput': myInput  },
-    data() {
-      return {
-        msg: 'Hello World!',
-        obj: {
-          a: 1
-        }
+export default {
+  // components: { myInput },
+  components: { 'myInput': myInput },
+  data () {
+    return {
+      msg: 'Hello World!',
+      obj: {
+        a: 1
       }
-    },
-    created() {
-      console.log(this.msg)
-      // 有get和set方法，因为vue是通过Object.defineProperty()来实现数据劫持的
-      console.log(this.obj)
     }
+  },
+  created () {
+    console.log(this.msg)
+    // 有get和set方法，因为vue是通过Object.defineProperty()来实现数据劫持的
+    console.log(this.obj)
   }
+}
 </script>

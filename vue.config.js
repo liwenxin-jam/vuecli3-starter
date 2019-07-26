@@ -3,7 +3,7 @@ const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 const cdn = {
   css: [
     'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
@@ -22,11 +22,11 @@ const cdn = {
 
 module.exports = {
   // 是否需要二级域名访问资源
-  publicPath: "./",
+  publicPath: './',
   // 输出文件目录
   // outputDir: isProduction ? path.resolve(__dirname, '../public') : "dist",
   // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。区别public/static第三方文件
-  assetsDir: "assets",
+  assetsDir: 'assets',
   // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径
   // indexPath: isProduction ? path.resolve(__dirname, '../public/index.html') : "./",
   lintOnSave: false,
@@ -34,13 +34,13 @@ module.exports = {
     config
       .entry('main')
       .add('babel-polyfill')
-      .end();
+      .end()
     config.resolve.alias
       .set('@', resolve('src'))
       .set('@views', resolve('src/views'))
       .set('@scss', resolve('src/assets/styles'))
       .set('@img', resolve('src/assets/images'))
-      .set('@utils', resolve('src/utils'));
+      .set('@utils', resolve('src/utils'))
 
     // svg loader
     // const svgRule = config.module.rule('svg') // 找到svg-loader
@@ -59,7 +59,7 @@ module.exports = {
 
     if (isProduction) {
       // 压缩代码
-      config.optimization.minimize(true);
+      config.optimization.minimize(true)
       // 分割代码
       config.optimization.splitChunks({
         chunks: 'all',
@@ -77,13 +77,13 @@ module.exports = {
             chunks: 'all'
           }
         }
-      });
+      })
       // 生产环境注入cdn
       config.plugin('html')
         .tap(args => {
-          args[0].cdn = cdn;
-          return args;
-        });
+          args[0].cdn = cdn
+          return args
+        })
     }
   },
   // vscode 断点调试 https://cn.vuejs.org/v2/cookbook/debugging-in-vscode.html
@@ -100,7 +100,7 @@ module.exports = {
         'element-ui': 'ELEMENT',
         'js-cookie': 'Cookies',
         'nprogress': 'NProgress'
-      };
+      }
       // @vue/cli-service的配置源码也是使用了terser-webpack-plugin插件进行Tree Shaking
       // 生产环境自动删除console和debugger
       // config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
@@ -116,13 +116,13 @@ module.exports = {
             compress: {
               // warnings: false,
               drop_debugger: true,
-              drop_console: true,
-            },
+              drop_console: true
+            }
           },
           sourceMap: false,
-          parallel: true,
+          parallel: true
         })
-      );
+      )
     } else {
       // 生产模式下省略devtool，或者手动设成nosources-source-map无源代码内容
       // source-map 原始源代码(断点调试) eval-source-map cheap-eval-source-map cheap-module-eval-source-map
@@ -150,7 +150,7 @@ module.exports = {
       }
     },
     // 启用 CSS modules for all css / pre-processor files.
-    modules: false,
+    modules: false
   },
   // enabled by default if the machine has more than 1 cores
   parallel: require('os').cpus().length > 1,

@@ -7,20 +7,19 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        msg: 'welcome to Vue!'
-      }
-    },
-    mounted() {
-      console.log('hello world!')
-      // debugger
-      // console.lo('hello world!')
+export default {
+  data () {
+    return {
+      msg: 'welcome to Vue!'
     }
+  },
+  mounted () {
+    console.log('hello world!')
+    // debugger
+    // console.lo('hello world!')
   }
+}
 </script>
-
 
 <style lang="scss" src="./index.scss" scoped>
   // src="./index.scss"
