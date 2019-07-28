@@ -25,8 +25,8 @@
     <section>
       <h3>Font Awesome</h3>
       <i class="fa fa-fw fa-address-book" />
-      <i :class="[fa, 'fa-fw', 'fa-2x', 'fa-address-book-o']" />
       <i class="fa-fw fa-3x fa-address-card" :class="{'fa': true}" />
+      <i :class="[fa, 'fa-fw', 'fa-2x', 'fa-address-book-o']" />
       <i class="fa-fw fa-3x fa-envelope-open" :class="status ? 'fa' : ''" />
       <!-- 如果存在两个动态class  可以如下这样写 注意标签上不能写两个:class -->
       <i class="fa-3x fa-archive" :class="[{'fa-fw': true}, status ? 'fa' : '']" />
