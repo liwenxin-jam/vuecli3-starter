@@ -69,6 +69,11 @@ const router = new Router({
       component: syncImportComponent('communication')
     },
     {
+      path: '/communicationVuex',
+      name: 'communicationVuex',
+      component: syncImportComponent('communication/vuex')
+    },
+    {
       path: '/practice',
       name: 'practice',
       component: syncImportComponent('practice')

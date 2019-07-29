@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
     <h3>{{msg}}</h3>
-    <input type="text" v-model="msg" />
+    <input ref="input" type="text" v-model="msg" />
     <!-- <input type="text" :value="msg" @input="e => msg = e.target.value" /> -->
     <hr />
     <!-- <h3>{{obj.name}}--{{obj.desc}}</h3> -->
@@ -21,8 +21,8 @@
       <button @click="updateComplexVal">更新值</button>
       <button @click="updateDescrition">更新描述</button>
     </section>
-    <!-- <hr />
-    <my-input :value.sync="message"></my-input>-->
+    <hr>
+    <!-- <my-input ref="myInput" :value.sync="message"></my-input> -->
   </section>
 </template>
 
@@ -49,6 +49,10 @@
       // 有get和set方法，因为vue是通过Object.defineProperty()来实现数据劫持的
       console.log(this.obj);
       // this.desc = this.obj.desc;
+    },
+    mounted() {
+      // console.log(this.$refs.input)
+      // console.log(this.$refs.myInput)
     },
     methods: {
       updateComplexVal() {

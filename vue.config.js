@@ -41,6 +41,7 @@ module.exports = {
       .set('@scss', resolve('src/assets/styles'))
       .set('@img', resolve('src/assets/images'))
       .set('@utils', resolve('src/utils'))
+      .set('@store', resolve('src/store'))
 
     // svg loader
     // const svgRule = config.module.rule('svg') // 找到svg-loader
@@ -103,26 +104,26 @@ module.exports = {
       }
       // @vue/cli-service的配置源码也是使用了terser-webpack-plugin插件进行Tree Shaking
       // 生产环境自动删除console和debugger
-      // config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
-      // config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
-      // config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
-      // config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log'];
       // uglifyjs-webpack-plugin 配置代码压缩
-      config.plugins.push(
-        // 生产环境自动删除console和debugger
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            warnings: false,
-            compress: {
-              // warnings: false,
-              drop_debugger: true,
-              drop_console: true
-            }
-          },
-          sourceMap: false,
-          parallel: true
-        })
-      )
+      // config.plugins.push(
+      //   // 生产环境自动删除console和debugger
+      //   new UglifyJsPlugin({
+      //     uglifyOptions: {
+      //       warnings: false,
+      //       compress: {
+      //         // warnings: false,
+      //         drop_debugger: true,
+      //         drop_console: true
+      //       }
+      //     },
+      //     sourceMap: false,
+      //     parallel: true
+      //   })
+      // )
     } else {
       // 生产模式下省略devtool，或者手动设成nosources-source-map无源代码内容
       // source-map 原始源代码(断点调试) eval-source-map cheap-eval-source-map cheap-module-eval-source-map

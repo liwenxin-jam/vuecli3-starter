@@ -31,50 +31,67 @@
       <!-- 如果存在两个动态class  可以如下这样写 注意标签上不能写两个:class -->
       <i class="fa-3x fa-archive" :class="[{'fa-fw': true}, status ? 'fa' : '']" />
       <i :class="iconName('bug')" />
-      <i class="fa fa-fw fa-address-book" :style="{position: 'relative', left:'50px'}" />
+      <i ref="icon" class="fa fa-fw fa-address-book" :style="style" />
     </section>
+    <div>
+      <button @click="updateStyle">更新style</button>
+    </div>
   </section>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      msg: "welcome to Vue!",
-      status: true,
-      fa: "fa"
-    };
-  },
-  mounted() {
-    console.log("hello world!");
-    // debugger
-    // console.lo('hello world!')
-  },
-  computed: {
-    iconName(name) {
-      // 正常情况下计算属性只能取当前data的数据进行计算
-      // return `fa fa-fw fa-${name}`;
-
-      // 接口返回的数组对象也可以通过传参去实现是否显示某些图标
-      return function(name) {
-        return `fa fa-fw fa-${name}`;
+  export default {
+    data() {
+      return {
+        msg: "welcome to Vue!",
+        status: true,
+        fa: "fa",
+        style: { position: 'relative', left: '50px' }
       };
+    },
+    mounted() {
+      console.log("hello world!");
+      // debugger
+      // console.lo('hello world!')
+    },
+    methods: {
+      updateStyle() {
+        this.style.left = '100px';
+        console.log('befor:', this.$refs.icon.style.left)
+        this.$nextTick(() => {
+          console.log('after:', this.$refs.icon.style.left)
+        })
+      }
+    },
+    computed: {
+      iconName(name) {
+        // 正常情况下计算属性只能取当前data的数据进行计算
+        // return `fa fa-fw fa-${name}`;
+
+        // 接口返回的数组对象也可以通过传参去实现是否显示某些图标
+        return function(name) {
+          return `fa fa-fw fa-${name}`;
+        };
+      }
     }
-  }
-};
+  };
 </script>
 
 
 <style lang="scss" scoped>
-// src="./index.scss"
-@import "./index.scss";
+  // src="./index.scss"
+  @import "./index.scss";
 
-.wrapper {
-  margin-top: 20%;
-  text-align: center;
-}
+  .wrapper {
+    margin-top: 20%;
+    text-align: center;
 
-.svg-icon {
-  margin: 5px;
-}
+    button {
+      margin: 5px;
+    }
+  }
+
+  .svg-icon {
+    margin: 5px;
+  }
 </style>
