@@ -16,3 +16,14 @@
     </transition>
   </div>
 </template>
+
+<script>
+  export default {
+    // watch: {
+    //   '$route'(to, from) {
+    //     console.log('from:', from)
+    //     console.log('to:', to)
+    //   }
+    // }
+  }
+</script>

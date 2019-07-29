@@ -17,7 +17,9 @@ const syncImportComponent = (relativeModulePath) => {
   return asyncComponent
 }
 
-export default new Router({
+const router = new Router({
+  // mode: "history",  // 默认 hash
+  // base: process.env.BASE_URL,
   routes: [{
       path: '/',
       redirect: '/icon'
@@ -52,7 +54,8 @@ export default new Router({
       name: 'lifecycleKeepAlive',
       component: syncImportComponent('lifecycle/keep-alive'),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        title: '缓存页'
       }
     },
     {
@@ -72,3 +75,16 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  next();
+});
+
+router.afterEach(route => {
+  // 从路由的元信息中获取 title 属性
+  if (route.meta.title) {
+    document.title = route.meta.title;
+  }
+});
+
+export default router;
