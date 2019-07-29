@@ -12,11 +12,16 @@
       <button @click="dispatch('test/setObj', { desc: 'dispatch-广州团队'})">dispatch异步更新</button>
     </section>
     <div>mapState：{{name}}--{{objInfo.desc}}</div>
+    <div>mapMutations和mapActions更新数据</div>
+    <section>
+      <button @click="commitUserName('commit-mapMutations')">commitUserName</button>
+      <button @click="dispatchUserName('dispatch-mapActions')">dispatchUserName</button>
+    </section>
   </section>
 </template>
 
 <script>
-  import { mapState, mapGetters } from 'vuex'
+  import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
   import store from '@store'
 
   export default {
@@ -45,6 +50,12 @@
       }
     },
     methods: {
+      ...mapMutations({
+        commitUserName: 'SET_USERNAME'
+      }),
+      ...mapActions({
+        dispatchUserName: 'setUserName'
+      }),
       commit(eventName, params) {
         store.commit(eventName, params)
       },
