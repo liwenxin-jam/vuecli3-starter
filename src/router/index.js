@@ -7,7 +7,7 @@ Vue.use(Router)
 const syncImportComponent = (relativeModulePath) => {
   const asyncComponent = () => {
     let component =
-      import( /* webpackChunkName: "view-[request]" */ `./views/${relativeModulePath}`)
+      import( /* webpackChunkName: "view-[request]" */ `@/views/${relativeModulePath}`)
     component.catch((e) => {
       console.log('加载错误')
       console.error(e)

@@ -54,6 +54,7 @@ export default {
     iconName(name) {
       // 正常情况下计算属性只能取当前data的数据进行计算
       // return `fa fa-fw fa-${name}`;
+
       // 接口返回的数组对象也可以通过传参去实现是否显示某些图标
       return function(name) {
         return `fa fa-fw fa-${name}`;
