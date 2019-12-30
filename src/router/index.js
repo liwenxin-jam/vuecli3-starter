@@ -77,6 +77,11 @@ const router = new Router({
       path: '/practice',
       name: 'practice',
       component: syncImportComponent('practice')
+    },
+    {
+      path: '/render',
+      name: 'render',
+      component: syncImportComponent('render')
     }
   ]
 })
