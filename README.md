@@ -31,3 +31,9 @@ git push origin test-demo:test-demo
 // 执行过一次，下次git pull或git push不需要再重新关联
 git push --set-upstream origin pre-demo
 ```
+
+6. 本地更新远程分支
+```
+// git本地仓库不显示最新的远程仓库分支
+git fetch // 或 git pull -p
+```
