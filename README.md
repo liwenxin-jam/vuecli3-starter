@@ -1,4 +1,5 @@
 ## 本地关联远程仓库
+> 以下操作可以直接终端terminal下执行脚本命令，也可以借助vs code来实现可视化操作。纯属个人喜欢，没有差别。
 
 1. 初始化
 ```
@@ -17,10 +18,16 @@ git add remote origin https://github.com/liwenxin-jam/vuecli3-starter.git
 git checkout -b test-demo
 ```
 
-4. 根据本地分支创建远程分支推送
+4. 创建远程分支
 ```
 // 假设想远程仓库已经有对应的分支，可以先执行以下命令删除
 // 1. git push origin :test-demo  2. git push origin --delete test-demo
 // 把新建的本地分支push到远程服务器，远程分支与本地分支同名
 git push origin test-demo:test-demo
+```
+
+5.关联远程分支
+```
+// 执行过一次，下次git pull或git push不需要再重新关联
+git push --set-upstream origin pre-demo
 ```
